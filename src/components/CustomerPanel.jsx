@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRequest, acceptBid, changeBid } from '../actions/actions';
 import Card from './Card';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerPanel() {
   const [newRequest, setNewRequest] = useState({ pickup: '', drop: '', distance: '' });
   const requests = useSelector((state) => state.requests);
   const dispatch = useDispatch();
 
+  const loggedInUser = useSelector((state) => state.loggedInUser);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/login")
+    }
+  }, [])
   const handleAddRequest = () => {
     if (newRequest.pickup && newRequest.drop && newRequest.distance) {
       const request = {

@@ -1,6 +1,15 @@
 import { createStore } from 'redux';
+import { ACCEPT_BID, ADD_REQUEST, CHANGE_BID, LOGIN_USER, LOGOUT_USER, PLACE_BID, REGISTER_USER } from '../actions/actions';
 
 const initialState = {
+  loggedInUser: null,
+  registeredUsers: [
+    {
+      name: 'Vivek',
+      email: 'vivek@gmail.com',
+      password: '11111111',
+    },
+  ],
   requests: [
     // { id: 1, pickup: 'Location A', drop: 'Location B', distance: '20 km', status: 'Pending', bids: [] },
     {
@@ -31,14 +40,43 @@ const initialState = {
   bidAmounts: {},
 };
 
-const reducer = (state = initialState, action) => {
+// const initialState = {
+//   loggedInUser: null,
+//   registeredUsers: [],
+//   requests: [],  // Assuming 'requests' data is part of your existing reducer
+// };
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_REQUEST':
+    // Handle Register User
+    case REGISTER_USER:
+      return {
+        ...state,
+        registeredUsers: [...state.registeredUsers, action.payload],
+      };
+
+    // Handle Login User
+    case LOGIN_USER:
+      return {
+        ...state,
+        loggedInUser: action.payload,
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        loggedInUser: null,
+      };
+
+
+    // Example of existing cases, we kept them as they were
+    case ADD_REQUEST:
       return {
         ...state,
         requests: [...state.requests, action.payload],
       };
-    case 'PLACE_BID':
+
+    case PLACE_BID:
       return {
         ...state,
         requests: state.requests.map((request) =>
@@ -47,7 +85,8 @@ const reducer = (state = initialState, action) => {
             : request
         ),
       };
-    case 'ACCEPT_BID':
+
+    case ACCEPT_BID:
       return {
         ...state,
         requests: state.requests.map((request) =>
@@ -65,7 +104,7 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
-    case 'CHANGE_BID':
+    case CHANGE_BID:
       return {
         ...state,
         requests: state.requests.map((request) =>
@@ -83,6 +122,7 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
 
 const store = createStore(reducer);
 

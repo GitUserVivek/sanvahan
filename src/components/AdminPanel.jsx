@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Card from './Card';
+import { useNavigate } from 'react-router-dom';
 
 function AdminPanel() {
   const requests = useSelector((state) => state.requests);
+  const loggedInUser = useSelector((state) => state.loggedInUser);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/login")
+    }
+  }, [])
   return (
     <Card>
       <div className="col-span-1 border p-4">

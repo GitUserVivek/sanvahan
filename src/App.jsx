@@ -4,19 +4,27 @@ import CustomerPanel from './components/CustomerPanel';
 import AdminPanel from './components/AdminPanel';
 import TruckOwnerPanel from './components/TruckOwnerPanel';
 import Navbar from './components/navbar';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegiserForm';
+import PrivateRoute from './components/PrivateRoute';
 
 
 function App() {
+
   return (
     <Router>
-      <div className="App">
+      <div className="App h-screen">
         {/* Add the Navbar here */}
         <Navbar />
         <Routes>
           {/* Route changes for React Router v6 */}
-          <Route path="/" element={<AdminPanel />} />
-          <Route path="/customer" element={<CustomerPanel />} />
-          <Route path="/truck-owner" element={<TruckOwnerPanel />} />
+
+
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/register' element={<RegisterForm />} />
+          <Route path="/" element={<PrivateRoute><AdminPanel /> </PrivateRoute>} />
+          <Route path="/customer" element={<PrivateRoute><CustomerPanel /> </PrivateRoute>} />
+          <Route path="/truck-owner" element={<PrivateRoute><TruckOwnerPanel /> </PrivateRoute>} />
         </Routes>
       </div>
     </Router>
