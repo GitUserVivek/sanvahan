@@ -1,5 +1,3 @@
-// src/components/Navbar.jsx
-
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../actions/actions';

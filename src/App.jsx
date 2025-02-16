@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CustomerPanel from './components/CustomerPanel';
 import AdminPanel from './components/AdminPanel';
 import TruckOwnerPanel from './components/TruckOwnerPanel';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegiserForm';
 import PrivateRoute from './components/PrivateRoute';
