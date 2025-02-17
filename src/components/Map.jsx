@@ -4,7 +4,7 @@ import L from 'leaflet';
 import io from 'socket.io-client';
 import TRUCK_ICON from '../assets/truck_icon.png'
 // Initialize socket connection
-const socket = io('http://localhost:5000');
+const socket = io('https://sanvahan-server.onrender.com');
 
 const Map = () => {
     const mapContainer = useRef(null);  // ref for the map container
