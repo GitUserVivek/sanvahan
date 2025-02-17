@@ -2,7 +2,11 @@ import { createStore } from 'redux';
 import { ACCEPT_BID, ADD_REQUEST, CHANGE_BID, LOGIN_USER, LOGOUT_USER, PLACE_BID, REGISTER_USER } from '../actions/actions';
 
 const initialState = {
-  loggedInUser: null,
+  loggedInUser: {
+    name: 'Vivek',
+    email: 'vivek@gmail.com',
+    password: '11111111',
+  },
   registeredUsers: [
     {
       name: 'Vivek',

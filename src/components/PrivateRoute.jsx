@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ children }) => {
     const loggedInUser = useSelector((state) => state.loggedInUser);
-
+    console.log(loggedInUser)
     // If user is not logged in, redirect to login page
     if (!loggedInUser) {
         return <Navigate to="/login" replace />;
