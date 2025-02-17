@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Card from './Card';
 import { useNavigate } from 'react-router-dom';
+import Map from './Map';
 
 function AdminPanel() {
   const requests = useSelector((state) => state.requests);
@@ -33,6 +34,7 @@ function AdminPanel() {
             </li>
           ))}
         </ul>
+        <Map />
       </div>
     </Card>
   );
