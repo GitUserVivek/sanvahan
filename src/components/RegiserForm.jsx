@@ -9,6 +9,9 @@ const RegisterForm = () => {
         username: '',
         email: '',
         password: '',
+        type: '',
+        organizationName: '',
+        drivingLicenseNumber: ''
     });
 
     const handleChange = (e) => {
@@ -22,13 +25,13 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(registerUser(formData));
-        setFormData({ username: '', email: '', password: '' });
+        setFormData({ username: '', email: '', password: '', type: '', organizationName: '', drivingLicenseNumber: '' });
         alert('Registered successfully!');
     };
 
     return (
-        <div className=" h-full flex justify-center items-center bg-gray-100">
-            <div className='max-w-md mx-auto p-10 mb-52 bg-white rounded-md shadow-lg '>
+        <div className="h-full flex justify-center items-center bg-gray-100">
+            <div className='max-w-md mx-auto p-10 mb-52 bg-white rounded-md shadow-lg'>
                 <h2 className="text-2xl font-semibold text-center mb-4">Register</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -61,6 +64,43 @@ const RegisterForm = () => {
                             className="w-full p-2 border border-gray-300 rounded-md"
                         />
                     </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium">Type</label>
+                        <select
+                            name="type"
+                            value={formData.type}
+                            onChange={handleChange}
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                        >
+                            <option value="">Select Type</option>
+                            <option value="customer">Customer</option>
+                            <option value="truckDriver">Truck Driver</option>
+                        </select>
+                    </div>
+                    {formData.type === 'customer' && (
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium">Organization Name</label>
+                            <input
+                                type="text"
+                                name="organizationName"
+                                value={formData.organizationName}
+                                onChange={handleChange}
+                                className="w-full p-2 border border-gray-300 rounded-md"
+                            />
+                        </div>
+                    )}
+                    {formData.type === 'truckDriver' && (
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium">Driving License Number</label>
+                            <input
+                                type="text"
+                                name="drivingLicenseNumber"
+                                value={formData.drivingLicenseNumber}
+                                onChange={handleChange}
+                                className="w-full p-2 border border-gray-300 rounded-md"
+                            />
+                        </div>
+                    )}
                     <button
                         type="submit"
                         className="w-full bg-blue-500 text-white py-2 rounded-md"
