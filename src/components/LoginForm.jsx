@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, logoutUser } from '../actions/actions';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -38,7 +38,11 @@ const LoginForm = () => {
             setError('Invalid email or password');
         }
     };
-
+    console.log(loggedInUser)
+    if (loggedInUser) {
+        console.log(loggedInUser)
+        return <Navigate to="/" replace />;
+    }
     return (
         <div className=" h-full flex justify-center items-center bg-gray-100">
             <div className='max-w-md mx-auto p-10 mb-52 bg-white rounded-md shadow-lg '>
