@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CustomerPanel from './components/CustomerPanel';
-import AdminPanel from './components/AdminPanel';
-import TruckOwnerPanel from './components/TruckOwnerPanel';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegiserForm';
+import CustomerPanel from './pages/CustomerPanel';
+import AdminPanel from './pages/AdminPanel';
+import TruckOwnerPanel from './pages/TruckOwnerPanel';
+import LoginForm from './pages/LoginForm';
+import RegisterForm from './pages/RegiserForm';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from "./components/Navbar"
 

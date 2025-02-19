@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Card from './Card';
+import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
-import Map from './Map';
+import Map from '../components/Map';
 
 function AdminPanel() {
   const requests = useSelector((state) => state.requests);
@@ -23,7 +23,7 @@ function AdminPanel() {
             <li key={request.id} className="mb-2 border-b pb-2">
               <strong>Request {request.id}:</strong> {request.pickup} to {request.drop} ({request.distance})<br />
               <strong>Status:</strong> {request.status}
-              {console.log(request)}
+
               <ul>
                 {request.bids.map((bid, index) => (
                   <li key={index} className="mb-2">

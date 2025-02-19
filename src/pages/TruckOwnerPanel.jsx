@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { placeBid } from '../actions/actions';
-import Card from './Card';
+import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
 
 function TruckOwnerPanel() {
