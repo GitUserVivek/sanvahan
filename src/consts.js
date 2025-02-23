@@ -1,7 +1,7 @@
 // let host = 'http://localhost:5000'
 
-const host = (window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://sanvahan-server.onrender.com');
-// let host = 'https://sanvahan-server.onrender.com'
+// const host = (window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://sanvahan-server.onrender.com');
+let host = 'https://sanvahan-server.onrender.com'
 
 // endpoints
 
