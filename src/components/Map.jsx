@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import io from 'socket.io-client';
 import TRUCK_ICON from '../assets/truck.png'
+import adminIcon from '../assets/admin.png'
 import TRUCK_GIF from '../assets/truck.gif'
 import { useSelector } from 'react-redux';
 // Initialize socket connection
@@ -20,7 +21,7 @@ const Map = () => {
     // });
 
     const customIcon = L.icon({
-        iconUrl: TRUCK_ICON, // Replace with your custom icon path
+        iconUrl: user.role !== 'admin' ? TRUCK_ICON : adminIcon, // Replace with your custom icon path
         iconSize: [32, 32],  // Size of the icon
         iconAnchor: [16, 32], // Point of the icon which will correspond to marker's position
         popupAnchor: [0, -32] // Position of the popup relative to the icon
@@ -75,14 +76,19 @@ const Map = () => {
                 } else {
                     let temp_marker = L.marker([lat, long], { icon: customIcon })
 
-                    temp_marker.on('mouseover', () => {
-                        temp_marker.setIcon(hoverIcon); // Change icon on hover
-                    });
+                    {
+                        user.role !== 'admin' && (() => {
+                            temp_marker.on('mouseover', () => {
+                                temp_marker.setIcon(hoverIcon); // Change icon on hover
+                            });
 
-                    temp_marker.on('mouseout', () => {
-                        temp_marker.setIcon(customIcon); // Reset icon when mouse leaves
-                    });
-                    temp_marker.bindPopup(`<strong> Name : ${data.name} , Phone : <a href='tel:${data.phone}'>${data.phone} </a> </strong>`)
+                            temp_marker.on('mouseout', () => {
+                                temp_marker.setIcon(customIcon); // Reset icon when mouse leaves
+                            })
+                        })()
+                    }
+                    let user_info = `<pre><strong> Name : </strong>${data.name}, <strong>Phone :</strong>  <strong><a href='tel:${data.phone}'>${data.phone} </a> </strong>\n<strong> lat: </strong>${lat} <strong> lon: </strong>${long} </pre>`
+                    temp_marker.bindPopup(user_info, { minWidth: 'fit-content' })
                     prevMarkers[id] = temp_marker.addTo(map);
                     // const marker = L.marker([lat, long], { icon: customIcon })
 
@@ -108,7 +114,7 @@ const Map = () => {
         };
     }, []);
 
-    return <div ref={mapContainer} style={{ height: '500px' }}></div>;
+    return <div ref={mapContainer} style={{ height: '100%' }}></div>;
 };
 
 export default Map;

@@ -16,9 +16,8 @@ function AdminPanel() {
   }, [])
   return (
     <Card>
-      <div className="col-span-1 border p-4">
-        <h2 className="text-xl font-bold mb-4">Admin Panel</h2>
-        <ul>
+      <div className="col-span-1 border p-4 h-full flex w-full">
+        <ul className='w-1/2 h-full'>
           {requests.map((request) => (
             <li key={request.id} className="mb-2 border-b pb-2">
               <strong>Request {request.id}:</strong> {request.pickup} to {request.drop} ({request.distance})<br />
@@ -34,7 +33,10 @@ function AdminPanel() {
             </li>
           ))}
         </ul>
-        <Map />
+        <div className="map w-full h-full">
+          <Map />
+
+        </div>
       </div>
     </Card>
   );

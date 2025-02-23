@@ -31,10 +31,10 @@ const RegisterForm = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/user/register', formData);
             dispatch({ type: 'REGISTER_USER', payload: response.data }); // Example for redux
-            alert('Registered successfully!');
+
             setFormData({ name: '', email: '', password: '', role: '', organizationName: '', licensePlate: '', capacity: '', drivingLicenseNumber: '', phone: '' });
         } catch (error) {
-            alert('Registration failed!');
+
             console.error('Registration error:', error);
         }
     };
@@ -97,7 +97,7 @@ const RegisterForm = () => {
                             required
                         >
                             <option value="">Select Role</option>
-                            <option value="admin">Admin</option>
+                            <option value="customer">Customer</option>
                             <option value="customer">Customer</option>
                             <option value="truckOwner">Truck Owner</option>
                             <option value="truckDriver">Truck Driver</option>

@@ -3,8 +3,7 @@ import { ACCEPT_BID, ADD_REQUEST, CHANGE_BID, LOGIN_USER, LOGOUT_USER, PLACE_BID
 
 const initialState = {
   loggedInUser: null,
-  registeredUsers: [
-  ],
+  registeredUsers: [],
   requests: [
     // { id: 1, pickup: 'Location A', drop: 'Location B', distance: '20 km', status: 'Pending', bids: [] },
     {
@@ -43,12 +42,6 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // Handle Register User
-    case REGISTER_USER:
-      return {
-        ...state,
-        registeredUsers: [...state.registeredUsers, action.payload],
-      };
 
     // Handle Login User
     case LOGIN_USER:
