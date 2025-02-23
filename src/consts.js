@@ -1,4 +1,5 @@
-let host = 'http://localhost:5000'
+// let host = 'http://localhost:5000'
+let host = 'https://sanvahan-server.onrender.com'
 
 // endpoints
 
