@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../actions/actions';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
-        type: '',
+        role: '',
         organizationName: '',
-        drivingLicenseNumber: ''
+        licensePlate: '',
+        capacity: '',
+        drivingLicenseNumber: '',
+        phone: ''
     });
 
     const handleChange = (e) => {
@@ -22,26 +25,34 @@ const RegisterForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(registerUser(formData));
-        setFormData({ username: '', email: '', password: '', type: '', organizationName: '', drivingLicenseNumber: '' });
-        alert('Registered successfully!');
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/register', formData);
+            dispatch({ type: 'REGISTER_USER', payload: response.data }); // Example for redux
+            alert('Registered successfully!');
+            setFormData({ name: '', email: '', password: '', role: '', organizationName: '', licensePlate: '', capacity: '', drivingLicenseNumber: '', phone: '' });
+        } catch (error) {
+            alert('Registration failed!');
+            console.error('Registration error:', error);
+        }
     };
 
     return (
-        <div className="h-full flex justify-center items-center bg-gray-100">
-            <div className='max-w-md mx-auto p-10 mb-52 bg-white rounded-md shadow-lg'>
+        <div className="h-full flex justify-center items-center bg-gray-100 ">
+            <div className=' mx-auto my-auto p-10 mb-52 bg-white w-1/4 rounded-md shadow-lg'>
                 <h2 className="text-2xl font-semibold text-center mb-4">Register</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium">Username</label>
+                        <label className="block text-sm font-medium">Name</label>
                         <input
                             type="text"
-                            name="username"
-                            value={formData.username}
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
                             className="w-full p-2 border border-gray-300 rounded-md"
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -52,6 +63,7 @@ const RegisterForm = () => {
                             value={formData.email}
                             onChange={handleChange}
                             className="w-full p-2 border border-gray-300 rounded-md"
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -62,34 +74,51 @@ const RegisterForm = () => {
                             value={formData.password}
                             onChange={handleChange}
                             className="w-full p-2 border border-gray-300 rounded-md"
+                            required
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium">Type</label>
-                        <select
-                            name="type"
-                            value={formData.type}
+                        <label className="block text-sm font-medium">Phone</label>
+                        <input
+                            type="text"
+                            name="phone"
+                            value={formData.phone}
                             onChange={handleChange}
                             className="w-full p-2 border border-gray-300 rounded-md"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium">Role</label>
+                        <select
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                            required
                         >
-                            <option value="">Select Type</option>
+                            <option value="">Select Role</option>
+                            <option value="admin">Admin</option>
                             <option value="customer">Customer</option>
+                            <option value="truckOwner">Truck Owner</option>
                             <option value="truckDriver">Truck Driver</option>
                         </select>
                     </div>
-                    {formData.type === 'customer' && (
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium">Organization Name</label>
-                            <input
-                                type="text"
-                                name="organizationName"
-                                value={formData.organizationName}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-gray-300 rounded-md"
-                            />
-                        </div>
+                    {formData.role === 'customer' && (
+                        <>
+
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium">Organization Name</label>
+                                <input
+                                    type="text"
+                                    name="organizationName"
+                                    value={formData.organizationName}
+                                    onChange={handleChange}
+                                    className="w-full p-2 border border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </>
                     )}
-                    {formData.type === 'truckDriver' && (
+                    {formData.role === 'truckDriver' && (
                         <div className="mb-4">
                             <label className="block text-sm font-medium">Driving License Number</label>
                             <input
@@ -98,6 +127,28 @@ const RegisterForm = () => {
                                 value={formData.drivingLicenseNumber}
                                 onChange={handleChange}
                                 className="w-full p-2 border border-gray-300 rounded-md"
+                            />
+                        </div>
+                    )}
+                    {formData.role === 'truckOwner' && (
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium">License Plate</label>
+                            <input
+                                type="text"
+                                name="licensePlate"
+                                value={formData.licensePlate}
+                                onChange={handleChange}
+                                className="w-full p-2 border border-gray-300 rounded-md"
+                                required
+                            />
+                            <label className="block text-sm font-medium">Capacity</label>
+                            <input
+                                type="number"
+                                name="capacity"
+                                value={formData.capacity}
+                                onChange={handleChange}
+                                className="w-full p-2 border border-gray-300 rounded-md"
+                                required
                             />
                         </div>
                     )}

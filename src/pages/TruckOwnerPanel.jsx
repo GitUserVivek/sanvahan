@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { placeBid } from '../actions/actions';
+import { placeBid } from '../redux/actions/actions';
 import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
 

@@ -12,8 +12,7 @@ const socket = io('http://localhost:5000');
 const Map = () => {
     const mapContainer = useRef(null);  // ref for the map container
     const [markers, setMarkers] = useState({});
-    const user = useSelector((state) => state.loggedInUser);
-    user.mobile = "7066649832"
+    const user = useSelector((state) => state.loggedInUser?.user);
     // Custom marker icon
     // const customIcon = L.icon({
     //     iconUrl: TRUCK_ICON,
@@ -52,7 +51,7 @@ const Map = () => {
                     map.setView([lat, long]);
                     lat_long = { lat, long }
                 }
-                socket.emit("send-location", { lat, long, name: user.name, mobile: user.mobile });
+                socket.emit("send-location", { lat, long, name: user.name, phone: user.phone });
             }, (error) => {
                 console.log(error);
             }, {
@@ -83,7 +82,7 @@ const Map = () => {
                     temp_marker.on('mouseout', () => {
                         temp_marker.setIcon(customIcon); // Reset icon when mouse leaves
                     });
-                    temp_marker.bindPopup(`<strong> Name : ${data.name} , Mobile : <a href='tel:${data.mobile}'>${data.mobile} </a> </strong>`)
+                    temp_marker.bindPopup(`<strong> Name : ${data.name} , Phone : <a href='tel:${data.phone}'>${data.phone} </a> </strong>`)
                     prevMarkers[id] = temp_marker.addTo(map);
                     // const marker = L.marker([lat, long], { icon: customIcon })
 

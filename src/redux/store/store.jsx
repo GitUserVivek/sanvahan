@@ -2,17 +2,8 @@ import { createStore } from 'redux';
 import { ACCEPT_BID, ADD_REQUEST, CHANGE_BID, LOGIN_USER, LOGOUT_USER, PLACE_BID, REGISTER_USER } from '../actions/actions';
 
 const initialState = {
-  loggedInUser: {
-    name: 'Vivek',
-    email: 'vivek@gmail.com',
-    password: '11111111',
-  },
+  loggedInUser: null,
   registeredUsers: [
-    {
-      name: 'Vivek',
-      email: 'vivek@gmail.com',
-      password: '11111111',
-    },
   ],
   requests: [
     // { id: 1, pickup: 'Location A', drop: 'Location B', distance: '20 km', status: 'Pending', bids: [] },
@@ -67,6 +58,8 @@ export const reducer = (state = initialState, action) => {
       };
 
     case LOGOUT_USER:
+      // Clear the localStorage when the user logs out
+      localStorage.removeItem('token');
       return {
         ...state,
         loggedInUser: null,
