@@ -97,7 +97,7 @@ const RegisterForm = () => {
                             required
                         >
                             <option value="">Select Role</option>
-                            <option value="customer">Customer</option>
+                            <option value="admin">Admin</option>
                             <option value="customer">Customer</option>
                             <option value="truckOwner">Truck Owner</option>
                             <option value="truckDriver">Truck Driver</option>
