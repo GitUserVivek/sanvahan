@@ -6,9 +6,11 @@ import TRUCK_ICON from '../assets/truck.png'
 import adminIcon from '../assets/admin.png'
 import TRUCK_GIF from '../assets/truck.gif'
 import { useSelector } from 'react-redux';
+import { host } from '../consts';
 // Initialize socket connection
 // const socket = io('https://sanvahan-server.onrender.com');
-const socket = io('http://localhost:5000');
+
+const socket = io(host);
 
 const Map = () => {
     const mapContainer = useRef(null);  // ref for the map container

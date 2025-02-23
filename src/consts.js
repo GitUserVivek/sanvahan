@@ -1,5 +1,7 @@
 // let host = 'http://localhost:5000'
-let host = 'https://sanvahan-server.onrender.com'
+
+const host = (window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://sanvahan-server.onrender.com');
+// let host = 'https://sanvahan-server.onrender.com'
 
 // endpoints
 
@@ -8,4 +10,4 @@ let registerEndpoint = `${host}/api/user/register`
 
 
 
-export { loginEndpoint }
+export { loginEndpoint, host, registerEndpoint }

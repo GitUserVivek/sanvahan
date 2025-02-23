@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { registerEndpoint } from '../consts';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const RegisterForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/api/user/register', formData);
+            const response = await axios.post(registerEndpoint, formData);
             dispatch({ type: 'REGISTER_USER', payload: response.data }); // Example for redux
 
             setFormData({ name: '', email: '', password: '', role: '', organizationName: '', licensePlate: '', capacity: '', drivingLicenseNumber: '', phone: '' });
